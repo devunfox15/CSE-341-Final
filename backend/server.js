@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', indexRoutes);
-S
+
 mongodb.initDb((err) => {
     if (err) {
     console.log(err);
