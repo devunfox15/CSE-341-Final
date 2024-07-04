@@ -1,0 +1,4 @@
+# ignores node modules
+node_modules
+#ignores .env file that holds private keys
+.env
