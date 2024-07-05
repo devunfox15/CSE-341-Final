@@ -5,7 +5,7 @@ const createError = require('http-errors');
 const checkId = async (id, db, type) => {
     const objectId = new ObjectId(id);
     const result = await mongodb
-        .getDatabase()
+        .getDb()
         .db()
         .collection(db)
         .findOne({ _id: objectId });

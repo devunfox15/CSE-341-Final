@@ -1,6 +1,6 @@
 const mongodb = require("../db/database");
 const ObjectId = require("mongodb").ObjectId;
-const collectionName = "Reviews";
+const collectionName = "reviews";
 
 const model = {};
 

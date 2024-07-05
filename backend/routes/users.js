@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controller/users');
+const userController = require('../controllers/users');
 const { userValidationRules, validate } = require('../middleware/userValidator.js');
 //todo uncomment this when authentication exists
 //const { isAuthenticated } = require('../middleware/authenticate.js')

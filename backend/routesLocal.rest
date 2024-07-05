@@ -1,0 +1,35 @@
+///OWNERS
+### GET all users
+GET http://localhost:8080/users/
+
+### GET user by ID
+GET http://localhost:8080/users/650c5812c06bc031e32200a1
+
+### CREATE New user
+POST http://localhost:8080/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "fName": "Aaron",
+    "lName": "Erbe",
+    "email": "aaronerbe@test.com",
+    "phone": "123-456-0911",
+    "address": "123 My Lane, Idaho City",
+    "role": "customer"
+}
+
+### UPDATE Existing User
+PUT http://localhost:8080/users/66874a3a5205734fabc30efc HTTP/1.1
+Content-Type: application/json
+
+{
+    "fName": "A-Aron",
+    "lName": "Erbe",
+    "email": "a-aron@test.com",
+    "phone": "123-456-0911",
+    "address": "911 My Lane, Idaho City",
+    "role": "admin"
+}
+
+### DELETE Existing User
+DELETE http://localhost:8080/users/66874a3a5205734fabc30efc HTTP/1.1
