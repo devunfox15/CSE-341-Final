@@ -72,10 +72,12 @@ const createUser = async (req, res, next) => {
             email: req.body.email,
             phone: req.body.phone,
             address: req.body.address,
-            role: req.body.role
+            role: req.body.role,
+            githubId: req.session.user.id // Ensure session user is correctly set
         };
+        console.log(user)
         const response = await mongodb.getDb().db().collection('users').insertOne(user);
-
+        console.table(response)
         if (response.acknowledged) {
             res.status(201).send();
         } else {
@@ -95,6 +97,7 @@ const updateUser = async (req, res, next) => {
         description: 'Add new user.',
         schema: { $ref: '#/definitions/UpdateUser' }
     } */
+   
     try {
         const userId = req.params.id;
 
@@ -105,10 +108,13 @@ const updateUser = async (req, res, next) => {
         const objectId = new ObjectId(userId);
 
         const user = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            fName: req.body.fName,
+            lName: req.body.lName,
             email: req.body.email,
-            password: req.body.password
+            phone: req.body.phone,
+            address: req.body.address,
+            role: req.body.role,
+            //githubId: req.user.id
         };
 
         await checkId(userId, "users", "User");
@@ -132,7 +138,6 @@ const deleteUser = async (req, res, next) => {
     //#swagger.tags=['Users']
     //#swagger.summary='Delete an user'
     //#swagger.description='This endpoint deletes a specific user by its ID from the database.'    
-    console.log('entering deleteUser controller')
     try {
         const userId = req.params.id;
 
@@ -149,9 +154,6 @@ const deleteUser = async (req, res, next) => {
             .db()
             .collection('users')
             .deleteOne({ _id: objectId });
-
-        console.log('result')
-        console.table(result)
 
         if (result.deletedCount > 0) {
             res.status(204).send();

@@ -6,25 +6,48 @@ const mongodb = require('./db/database');
 const indexRoutes = require('./routes/index');
 const passport = require('passport');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
 
 const port = process.env.PORT || 8080;
 const app = express();
 
+// Configure MongoDBStore
+const store = new MongoDBStore({
+    uri: process.env.MONGODB_URI,
+    collection: 'sessions' // Name of the collection to store sessions
+});
+
+store.on('error', function(error) {
+    console.error('MongoDBStore connection error:', error);
+});
+
+// Use cors middleware
+app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'], origin: "*" }));
+
+// Use body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//Auth
-app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'], origin: "*" }));
+
+// Configure express-session middleware
 app.use(session({
     secret: "secret",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: store, // Use MongoDBStore as session store
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24, // Session expiration in milliseconds (e.g., 1 day)
+        secure: process.env.NODE_ENV === 'production' ? true : false, // Secure cookie in production
+        sameSite: 'strict' // Restrict cookie to same-site requests
+    }
 }));
+
+// Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Github strategy
+// Configure GitHub strategy for passport
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -42,6 +65,7 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
+// Routes
 app.use('/', indexRoutes);
 
 // OAuth endpoints
@@ -50,17 +74,21 @@ app.get('/', (req, res) => {
 });
 
 // GitHub callback
-//app.get('/github/callback', passport.authenticate('github', { failureRedirect: '/api-docs', session: false }),
-app.get('/github/callback', passport.authenticate('github', { failureRedirect: '/', session: false }),
+app.get('/github/callback', passport.authenticate('github', { failureRedirect: '/', session: true }),
     (req, res) => {
-        req.session.user = req.user;
-        console.log(req.user)
-        console.log(req.session.user)
-        console.log(req.session.user.displayName)
-        res.redirect('/');
+        req.session.user = req.user; // Ensure req.user is correctly populated
+        console.log("req.session.user:", req.session.user);
+        console.log("req.session.user.id:", req.session.user ? req.session.user.id : 'undefined');
+        req.session.save((err) => {
+            if (err) {
+                console.error("Session save error:", err);
+            }
+            res.redirect('/');
+        });
     }
 );
 
+// Initialize DB and start server
 mongodb.initDb((err) => {
     if (err) {
         console.log(err);
@@ -69,4 +97,10 @@ mongodb.initDb((err) => {
             console.log(`Connected to DB and listening on ${port}`);
         });
     }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
 });

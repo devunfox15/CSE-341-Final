@@ -1,10 +1,9 @@
 const isAuthenticated = (req, res, next) => {
-    console.log(req.session.user)
-    //check session user if not, you don't have access
-    if (req.session.user === undefined){
+    if (!req.session.user || !req.session.user.id) {
+        console.log("User session is undefined or does not have an id");
         return res.status(401).json("You do not have access.");
     }
     next();
-}
+};
 
-module.exports = { isAuthenticated }
+module.exports = { isAuthenticated };

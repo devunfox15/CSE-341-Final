@@ -1,4 +1,10 @@
 ///OWNERS
+### LOGIN
+GET https://localhost:8080/login/
+
+### LOGOUT
+GET https://localhost:8080/logout/
+
 ### GET all users
 GET http://localhost:8080/users/
 
@@ -8,6 +14,7 @@ GET http://localhost:8080/users/650c5812c06bc031e32200a1
 ### CREATE New user
 POST http://localhost:8080/users HTTP/1.1
 Content-Type: application/json
+Cookie: connect.sid=s%3A26g_3n-wwJl71_ad5sS0Sv83lN4jHl49.qoOo0HedoXeIgNft4lumFpxY8X%2BRh3RYkslMykQrFUY
 
 {
     "fName": "Aaron",

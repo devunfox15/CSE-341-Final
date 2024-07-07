@@ -8,7 +8,8 @@
     "email": "billgates@test.com",
     "phone": "123-456-7890",
     "address": "123 Microsoft Way",
-    "role": "admin"
+    "role": "admin",
+    "githubId": 12345678
   },
   {
     "_id": {
@@ -19,7 +20,8 @@
     "email": "bob@example.com",
     "phone": "234-567-8901",
     "address": "456 Barker Lane",
-    "role": "customer"
+    "role": "customer",
+    "githubId": 12345678
   },
   {
     "_id": {
@@ -30,7 +32,8 @@
     "email": "test@gmail.com",
     "phone": "345-678-9012",
     "address": "789 Birch Street",
-    "role": "customer"
+    "role": "customer",
+    "githubId": 12345678
   },
   {
     "_id": {
@@ -41,6 +44,7 @@
     "email": "larryellison@test.com",
     "phone": "456-789-0123",
     "address": "101 Oracle Road",
-    "role": "admin"
+    "role": "admin",
+    "githubId": 12345678
   }
 ]
