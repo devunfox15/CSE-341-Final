@@ -46,6 +46,10 @@ const createProduct = async (req, res, next) => {
         const product = {
             name: req.body.name,
             description: req.body.description,
+            price: req.body.price,
+            category: req.body.category,
+            size: req.body.size,
+            color: req.body.color
         };
         const response = await mongodb.getDb().db().collection('products').insertOne(product);
         
@@ -68,6 +72,10 @@ const updateProduct = async (req, res, next) => {
         const product = {
             name: req.body.name,
             description: req.body.description,
+            price: req.body.price,
+            category: req.body.category,
+            size: req.body.size,
+            color: req.body.color
         };
         const response = await mongodb.getDb().db().collection('products').replaceOne({ _id: productId }, product);
 
