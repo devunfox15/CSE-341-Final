@@ -1,22 +1,23 @@
 const mongodb = require('../db/database');
+const {checkUserIsInDB} = require('./authenticate')
 
-const checkUserInDB = async (id) => {
-    console.log("id:", id);
-    const user = await mongodb.getDb().db().collection('users').findOne({ githubId: parseInt(id) });
-    console.log(user)
-    if (!user) {
-        console.log("User not found in database");
-        throw new Error("User not found");
-    }
+//const checkUserInDB = async (id) => {
+//    console.log("id:", id);
+//    const user = await mongodb.getDb().db().collection('users').findOne({ githubId: parseInt(id) });
+//    console.log(user)
+//    if (!user) {
+//        console.log("User not found in database");
+//        throw new Error("User not found");
+//    }
 
-    console.log("User found in database:", user);
+//    console.log("User found in database:", user);
 
-    return { _id: user._id, role: user.role };
-};
+//    return { _id: user._id, role: user.role };
+//};
 
 const isAdmin = async (req, res, next) => {
     try {
-        const { _id, role } = await checkUserInDB(req.session.user.id);
+        const { _id, role } = await checkUserIsInDB(req.session.user.id);
 
         // Attach MongoDB user _id and role to req.session.user for potential later use
         req.session.user._id = _id;
@@ -35,7 +36,7 @@ const isAdmin = async (req, res, next) => {
 
         // Handle specific error cases
         if (error.message === "User not found") {
-            return res.status(404).json("User not found in the database.");
+            return res.status(404).json("User not found in the database.  Access Denied");
         }
 
         return res.status(500).json('Internal server error');

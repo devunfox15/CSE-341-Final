@@ -2,6 +2,8 @@ const mongodb = require('../db/database');
 const { ObjectId } = require('mongodb');
 const createError = require('http-errors');
 const { checkId } = require('../middleware/errorChecks');
+const {checkUserIsNotInDB} = require('../middleware/authenticate')
+
 
 
 const getAll = async (req, res, next) => {
@@ -66,6 +68,13 @@ const createUser = async (req, res, next) => {
         schema: { $ref: '#/definitions/CreateUser' }
     } */    
     try {
+        console.log('step 1');
+        console.log(req.session.user.id);
+
+        // Ensure user does not already exist in DB
+        await checkUserIsNotInDB(req.session.user.id);
+        console.log('step 3');
+
         const user = {
             fName: req.body.fName,
             lName: req.body.lName,
@@ -73,20 +82,24 @@ const createUser = async (req, res, next) => {
             phone: req.body.phone,
             address: req.body.address,
             role: req.body.role,
-            githubId: parseInt(req.session.user.id,10)
+            githubId: parseInt(req.session.user.id, 10)
         };
-        console.log(user)
+        console.log(user);
+
         const response = await mongodb.getDb().db().collection('users').insertOne(user);
-        console.table(response)
+        console.table(response);
+
         if (response.acknowledged) {
             res.status(201).send();
         } else {
             res.status(500).json(response.error || 'Failed to create user. Please try again.');
         }
     } catch (error) {
+        console.log('step 4');
         next(error);
     }
 };
+
 
 const updateUser = async (req, res, next) => {
     //#swagger.tags=['Users']
