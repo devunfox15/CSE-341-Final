@@ -3,7 +3,7 @@ const mongodb = require('../db/database');
 const checkUserInDB = async (id) => {
     console.log("id:", id);
     const user = await mongodb.getDb().db().collection('users').findOne({ githubId: parseInt(id) });
-
+    console.log(user)
     if (!user) {
         console.log("User not found in database");
         throw new Error("User not found");

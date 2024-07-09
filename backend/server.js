@@ -99,8 +99,24 @@ mongodb.initDb((err) => {
     }
 });
 
-// Error handling middleware
+//// Error handling middleware
+//app.use((err, req, res, next) => {
+//    console.error(err.stack);
+//    res.status(500).send('Internal Server Error');
+//});
+
+// Error handler for 404
+app.use((req, res, next) => {
+    next(createError(404, 'Not Found'));
+});
+
+// General error handler
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Internal Server Error');
+    res.status(err.status || 500);
+    res.send({
+        error: {
+            status: err.status || 500,
+            message: err.message
+        }
+    });
 });

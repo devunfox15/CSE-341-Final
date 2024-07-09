@@ -7,7 +7,7 @@ const { checkId } = require('../middleware/errorChecks');
 const getAll = async (req, res, next) => {
     //#swagger.tags=['Users']
     //#swagger.summary='Retrieve a list of all users'
-    //#swagger.description='This endpoint retrieves all users available in the database.'
+    //#swagger.description='Must be Authenticated via Github 1st.  This endpoint retrieves all users available in the database.'
     try {
         const result = await mongodb.getDb().db().collection('users').find().toArray();
 
@@ -25,7 +25,7 @@ const getAll = async (req, res, next) => {
 const getById = async (req, res, next) => {
     //#swagger.tags=['Users']
     //#swagger.summary='Get an user by ID'
-    //#swagger.description='This endpoint retrieves a specific user by its ID.'    
+    //#swagger.description='Must be Authenticated via Github 1st.  This endpoint retrieves a specific user by its ID.'    
     /* #swagger.parameters['id'] = {
             in: 'path',
             required: 'true',
@@ -59,7 +59,7 @@ const getById = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     //#swagger.tags=['Users']
     //#swagger.summary='Create a new user'
-    //#swagger.description='This endpoint creates a new user in the database.'    
+    //#swagger.description='Must be Authenticated via Github 1st.  This endpoint creates a new user in the database.'    
     /*  #swagger.parameters['body'] = {
         in: 'body',
         description: 'Add new user.',
@@ -73,7 +73,7 @@ const createUser = async (req, res, next) => {
             phone: req.body.phone,
             address: req.body.address,
             role: req.body.role,
-            githubId: req.session.user.id // Ensure session user is correctly set
+            githubId: parseInt(req.session.user.id,10)
         };
         console.log(user)
         const response = await mongodb.getDb().db().collection('users').insertOne(user);
@@ -91,13 +91,12 @@ const createUser = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
     //#swagger.tags=['Users']
     //#swagger.summary='Update an existing user'
-    //#swagger.description='This endpoint updates an existing user in the database.'    
+    //#swagger.description='Must be Authenticated via Github 1st.  This endpoint updates an existing user in the database.'    
     /*  #swagger.parameters['body'] = {
         in: 'body',
         description: 'Add new user.',
         schema: { $ref: '#/definitions/UpdateUser' }
     } */
-   
     try {
         const userId = req.params.id;
 
@@ -106,7 +105,7 @@ const updateUser = async (req, res, next) => {
         }
 
         const objectId = new ObjectId(userId);
-
+        
         const user = {
             fName: req.body.fName,
             lName: req.body.lName,
@@ -114,7 +113,7 @@ const updateUser = async (req, res, next) => {
             phone: req.body.phone,
             address: req.body.address,
             role: req.body.role,
-            //githubId: req.user.id
+            githubId: parseInt(req.session.user.id,10)
         };
 
         await checkId(userId, "users", "User");
@@ -137,7 +136,7 @@ const updateUser = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
     //#swagger.tags=['Users']
     //#swagger.summary='Delete an user'
-    //#swagger.description='This endpoint deletes a specific user by its ID from the database.'    
+    //#swagger.description='Must be Authenticated via Github 1st.  This endpoint deletes a specific user by its ID from the database.'    
     try {
         const userId = req.params.id;
 

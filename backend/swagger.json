@@ -17,7 +17,7 @@
         "tags": [
           "Authentication"
         ],
-        "summary": "Authenticate User using Github",
+        "summary": "Authenticate User using Github. Cannot be done from here. Visit /login",
         "description": "This endpoint is used to login.",
         "responses": {
           "default": {
@@ -31,7 +31,7 @@
         "tags": [
           "Authentication"
         ],
-        "summary": "Logout Authenticated User",
+        "summary": "Logout Authenticated User. Cannot be done from here. Visit /logout",
         "description": "This endpoint is used to logout.",
         "responses": {
           "default": {
@@ -202,7 +202,7 @@
           "Users"
         ],
         "summary": "Retrieve a list of all users",
-        "description": "This endpoint retrieves all users available in the database.",
+        "description": "Must be Authenticated via Github 1st. This endpoint retrieves all users available in the database.",
         "produces": [
           "application/json"
         ],
@@ -212,6 +212,15 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -220,7 +229,7 @@
           "Users"
         ],
         "summary": "Create a new user",
-        "description": "This endpoint creates a new user in the database.",
+        "description": "Must be Authenticated via Github 1st. This endpoint creates a new user in the database.",
         "parameters": [
           {
             "name": "body",
@@ -234,6 +243,9 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "422": {
             "description": "Unprocessable Entity"
@@ -250,7 +262,7 @@
           "Users"
         ],
         "summary": "Get an user by ID",
-        "description": "This endpoint retrieves a specific user by its ID.",
+        "description": "Must be Authenticated via Github 1st. This endpoint retrieves a specific user by its ID.",
         "produces": [
           "application/json"
         ],
@@ -269,6 +281,15 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -277,7 +298,7 @@
           "Users"
         ],
         "summary": "Update an existing user",
-        "description": "This endpoint updates an existing user in the database.",
+        "description": "Must be Authenticated via Github 1st. This endpoint updates an existing user in the database.",
         "parameters": [
           {
             "name": "id",
@@ -311,7 +332,7 @@
           "Users"
         ],
         "summary": "Delete an user",
-        "description": "This endpoint deletes a specific user by its ID from the database.",
+        "description": "Must be Authenticated via Github 1st. This endpoint deletes a specific user by its ID from the database.",
         "parameters": [
           {
             "name": "id",
@@ -327,6 +348,66 @@
           "401": {
             "description": "Unauthorized"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateUser": {
+      "type": "object",
+      "properties": {
+        "fName": {
+          "type": "string",
+          "example": "MyFirstName"
+        },
+        "lName": {
+          "type": "string",
+          "example": "MyLastName"
+        },
+        "email": {
+          "type": "string",
+          "example": "me@example.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "123-456-0911"
+        },
+        "address": {
+          "type": "string",
+          "example": "123 My Place"
+        },
+        "role": {
+          "type": "string",
+          "example": "customer"
+        }
+      }
+    },
+    "UpdateUser": {
+      "type": "object",
+      "properties": {
+        "fName": {
+          "type": "string",
+          "example": "MyFirstName"
+        },
+        "lName": {
+          "type": "string",
+          "example": "MyLastName"
+        },
+        "email": {
+          "type": "string",
+          "example": "me@example.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "123-456-0911"
+        },
+        "address": {
+          "type": "string",
+          "example": "123 My Place"
+        },
+        "role": {
+          "type": "string",
+          "example": "admin"
         }
       }
     }
