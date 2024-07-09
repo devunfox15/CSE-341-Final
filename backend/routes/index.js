@@ -8,6 +8,7 @@ const passport = require('passport');
 //});
 router.use("/reviews", require("./reviews"));
 router.use("/users", require("./users"));
+router.use('/api-docs', require('./swagger'));
 
 //login/logout
 router.get(
