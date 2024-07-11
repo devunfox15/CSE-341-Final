@@ -9,6 +9,7 @@ const passport = require('passport');
 router.use('/reviews', require('./reviews'));
 router.use('/users', require('./users'));
 router.use('/orders', require('./orders'));
+router.use('/products', require('./products'));
 router.use('/api-docs', require('./swagger'));
 
 //login/logout
