@@ -1,50 +1,50 @@
 [
-  {
-    "_id": {
-      "$oid": "650c5812c06bc031e32200a1"
+    {
+        "_id": {
+            "$oid": "650c5812c06bc031e32200a1"
+        },
+        "fName": "Bill",
+        "lName": "Gates",
+        "email": "billgates@test.com",
+        "phone": "123-456-7890",
+        "address": "123 Microsoft Way",
+        "role": "admin",
+        "githubId": 12345678
     },
-    "fName": "Bill",
-    "lName": "Gates",
-    "email": "billgates@test.com",
-    "phone": "123-456-7890",
-    "address": "123 Microsoft Way",
-    "role": "admin",
-    "githubId": 12345678
-  },
-  {
-    "_id": {
-      "$oid": "6338cf4fc51624e0408341bc"
+    {
+        "_id": {
+            "$oid": "6338cf4fc51624e0408341bc"
+        },
+        "fName": "Bob",
+        "lName": "Barker",
+        "email": "bob@example.com",
+        "phone": "234-567-8901",
+        "address": "456 Barker Lane",
+        "role": "customer",
+        "githubId": 12345678
     },
-    "fName": "Bob",
-    "lName": "Barker",
-    "email": "bob@example.com",
-    "phone": "234-567-8901",
-    "address": "456 Barker Lane",
-    "role": "customer",
-    "githubId": 12345678
-  },
-  {
-    "_id": {
-      "$oid": "650c5812c06bc031e32200a2"
+    {
+        "_id": {
+            "$oid": "650c5812c06bc031e32200a2"
+        },
+        "fName": "Sarah",
+        "lName": "Birch",
+        "email": "test@gmail.com",
+        "phone": "345-678-9012",
+        "address": "789 Birch Street",
+        "role": "customer",
+        "githubId": 12345678
     },
-    "fName": "Sarah",
-    "lName": "Birch",
-    "email": "test@gmail.com",
-    "phone": "345-678-9012",
-    "address": "789 Birch Street",
-    "role": "customer",
-    "githubId": 12345678
-  },
-  {
-    "_id": {
-      "$oid": "650c5812c06bc031e32200a3"
-    },
-    "fName": "Larry",
-    "lName": "Ellison",
-    "email": "larryellison@test.com",
-    "phone": "456-789-0123",
-    "address": "101 Oracle Road",
-    "role": "admin",
-    "githubId": 12345678
-  }
+    {
+        "_id": {
+            "$oid": "650c5812c06bc031e32200a3"
+        },
+        "fName": "Larry",
+        "lName": "Ellison",
+        "email": "larryellison@test.com",
+        "phone": "456-789-0123",
+        "address": "101 Oracle Road",
+        "role": "admin",
+        "githubId": 12345678
+    }
 ]

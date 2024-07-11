@@ -1,38 +1,38 @@
 [
-  {
-    "_id": { "$oid": "650c5812c06bc031e32200a3" },
-    "name": "T-Shirt",
-    "description": "A comfortable cotton t-shirt",
-    "price": 19.99,
-    "category": "Clothing",
-    "size": "M",
-    "color": "Blue"
-  },
-  {
-    "_id": { "$oid": "650c5812c06bc031e32200a4" },
-    "name": "Jeans",
-    "description": "Stylish denim jeans",
-    "price": 49.99,
-    "category": "Clothing",
-    "size": "32",
-    "color": "Black"
-  },
-  {
-    "_id": { "$oid": "650c5812c06bc031e32200ab" },
-    "name": "Jacket",
-    "description": "Warm and cozy jacket",
-    "price": 89.99,
-    "category": "Clothing",
-    "size": "L",
-    "color": "Green"
-  },
-  {
-    "_id": { "$oid": "650c5812c06bc031e32200ac" },
-    "name": "Sneakers",
-    "description": "Comfortable running shoes",
-    "price": 69.99,
-    "category": "Footwear",
-    "size": "10",
-    "color": "White"
-  }
+    {
+        "_id": { "$oid": "650c5812c06bc031e32200a3" },
+        "name": "T-Shirt",
+        "description": "A comfortable cotton t-shirt",
+        "price": 19.99,
+        "category": "Clothing",
+        "size": "M",
+        "color": "Blue"
+    },
+    {
+        "_id": { "$oid": "650c5812c06bc031e32200a4" },
+        "name": "Jeans",
+        "description": "Stylish denim jeans",
+        "price": 49.99,
+        "category": "Clothing",
+        "size": "32",
+        "color": "Black"
+    },
+    {
+        "_id": { "$oid": "650c5812c06bc031e32200ab" },
+        "name": "Jacket",
+        "description": "Warm and cozy jacket",
+        "price": 89.99,
+        "category": "Clothing",
+        "size": "L",
+        "color": "Green"
+    },
+    {
+        "_id": { "$oid": "650c5812c06bc031e32200ac" },
+        "name": "Sneakers",
+        "description": "Comfortable running shoes",
+        "price": 69.99,
+        "category": "Footwear",
+        "size": "10",
+        "color": "White"
+    }
 ]
