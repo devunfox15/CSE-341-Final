@@ -14,9 +14,7 @@
   {
     "_id": { "$oid": "650c5812c06bc031e32200a6" },
     "userId": { "$oid": "650c5812c06bc031e32200a2" },
-    "productIds": [
-      { "$oid": "650c5812c06bc031e32200a4" }
-    ],
+    "productIds": [{ "$oid": "650c5812c06bc031e32200a4" }],
     "totalPrice": 49.99,
     "orderDate": "2024-06-02",
     "status": "Processing",
@@ -37,9 +35,7 @@
   {
     "_id": { "$oid": "650c5812c06bc031e32200ae" },
     "userId": { "$oid": "650c5812c06bc031e32200aa" },
-    "productIds": [
-      { "$oid": "650c5812c06bc031e32200a3" }
-    ],
+    "productIds": [{ "$oid": "650c5812c06bc031e32200a3" }],
     "totalPrice": 19.99,
     "orderDate": "2024-06-04",
     "status": "Cancelled",

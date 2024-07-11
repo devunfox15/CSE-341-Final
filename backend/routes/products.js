@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const productController = require('../controllers/products');
 
 // List all products (GET)
@@ -14,6 +14,6 @@ router.post('/', productController.createProduct);
 router.put('/:id', productController.updateProduct);
 
 // Delete individual product (DELETE)
-router.delete('/:id',  productController.deleteProduct)
+router.delete('/:id', productController.deleteProduct);
 
 module.exports = router;

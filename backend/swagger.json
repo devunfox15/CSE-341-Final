@@ -7,16 +7,11 @@
   },
   "host": "localhost:8080",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "paths": {
     "/login": {
       "get": {
-        "tags": [
-          "Authentication"
-        ],
+        "tags": ["Authentication"],
         "summary": "Authenticate User using Github. Cannot be done from here. Visit /login",
         "description": "This endpoint is used to login.",
         "responses": {
@@ -28,9 +23,7 @@
     },
     "/logout": {
       "get": {
-        "tags": [
-          "Authentication"
-        ],
+        "tags": ["Authentication"],
         "summary": "Logout Authenticated User. Cannot be done from here. Visit /logout",
         "description": "This endpoint is used to logout.",
         "responses": {
@@ -42,14 +35,10 @@
     },
     "/reviews/": {
       "get": {
-        "tags": [
-          "Reviews"
-        ],
+        "tags": ["Reviews"],
         "summary": "GET all",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -60,9 +49,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Reviews"
-        ],
+        "tags": ["Reviews"],
         "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
         "parameters": [
           {
@@ -102,14 +89,10 @@
     },
     "/reviews/{id}": {
       "get": {
-        "tags": [
-          "Reviews"
-        ],
+        "tags": ["Reviews"],
         "summary": "GET by id",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -128,9 +111,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Reviews"
-        ],
+        "tags": ["Reviews"],
         "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
         "parameters": [
           {
@@ -174,9 +155,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Reviews"
-        ],
+        "tags": ["Reviews"],
         "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
         "parameters": [
           {
@@ -198,14 +177,10 @@
     },
     "/users/": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Retrieve a list of all users",
         "description": "Must be Authenticated via Github 1st. This endpoint retrieves all users available in the database.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -225,9 +200,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Create a new user",
         "description": "Must be Authenticated via Github 1st. This endpoint creates a new user in the database.",
         "parameters": [
@@ -258,14 +231,10 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get an user by ID",
         "description": "Must be Authenticated via Github 1st. This endpoint retrieves a specific user by its ID.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -294,9 +263,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Update an existing user",
         "description": "Must be Authenticated via Github 1st. This endpoint updates an existing user in the database.",
         "parameters": [
@@ -328,9 +295,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Delete an user",
         "description": "Must be Authenticated via Github 1st. This endpoint deletes a specific user by its ID from the database.",
         "parameters": [
@@ -353,14 +318,10 @@
     },
     "/orders/": {
       "get": {
-        "tags": [
-          "orders"
-        ],
+        "tags": ["orders"],
         "summary": "Retrieve a list of all orders",
         "description": "Must be Authenticated via Github 1st. This endpoint retrieves all orders available in the database.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -380,9 +341,7 @@
         }
       },
       "post": {
-        "tags": [
-          "orders"
-        ],
+        "tags": ["orders"],
         "summary": "Create a new order",
         "description": "Must be Authenticated via Github 1st. This endpoint creates a new order in the database.",
         "parameters": [
@@ -413,14 +372,10 @@
     },
     "/orders/{id}": {
       "get": {
-        "tags": [
-          "orders"
-        ],
+        "tags": ["orders"],
         "summary": "Get an order by ID",
         "description": "Must be Authenticated via Github 1st. This endpoint retrieves a specific order by its ID.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -449,9 +404,7 @@
         }
       },
       "put": {
-        "tags": [
-          "orders"
-        ],
+        "tags": ["orders"],
         "summary": "Update an existing order",
         "description": "Must be Authenticated via Github 1st. This endpoint updates an existing order in the database.",
         "parameters": [
@@ -483,9 +436,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "orders"
-        ],
+        "tags": ["orders"],
         "summary": "Delete an order",
         "description": "Must be Authenticated via Github 1st. This endpoint deletes a specific order by its ID from the database.",
         "parameters": [

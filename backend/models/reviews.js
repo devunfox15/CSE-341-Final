@@ -1,11 +1,11 @@
-const mongodb = require("../db/database");
-const ObjectId = require("mongodb").ObjectId;
-const collectionName = "reviews";
+const mongodb = require('../db/database');
+const ObjectId = require('mongodb').ObjectId;
+const collectionName = 'reviews';
 
 const model = {};
 
 const getCollection = async () => {
-  if (!collectionName) throw new Error("Collection name is null!");
+  if (!collectionName) throw new Error('Collection name is null!');
   return await mongodb.getCollection(collectionName);
 };
 
@@ -14,7 +14,7 @@ const getObjectId = (id) => {
 };
 
 const idOrLastId = async (id, collection = null) => {
-  if (id === "undefined") {
+  if (id === 'undefined') {
     const lastRecord = await getLastRecord(collection);
     id = lastRecord._id;
   }

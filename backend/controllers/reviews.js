@@ -1,4 +1,4 @@
-const model = require("../models/reviews");
+const model = require('../models/reviews');
 const ctrl = {};
 
 ctrl.getAll = async (req, res) => {
@@ -7,7 +7,7 @@ ctrl.getAll = async (req, res) => {
   try {
     const all = await model.getAll();
 
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(all);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -20,7 +20,7 @@ ctrl.getSingle = async (req, res) => {
   try {
     const one = await model.getOne(req.params.id);
 
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(one);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -44,7 +44,9 @@ ctrl.create = async (req, res) => {
     if (result.success) {
       res.status(201).json(result.response);
     } else {
-      res.status(500).json(result.error || "Some error occurred while creating new record.");
+      res
+        .status(500)
+        .json(result.error || 'Some error occurred while creating new record.');
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -68,7 +70,9 @@ ctrl.update = async (req, res) => {
     if (result.success) {
       res.status(204).send();
     } else {
-      res.status(500).json(result.error || "Some error occurred while updating the record.");
+      res
+        .status(500)
+        .json(result.error || 'Some error occurred while updating the record.');
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -85,7 +89,9 @@ ctrl.delete = async (req, res) => {
     if (result.success) {
       res.status(204).send();
     } else {
-      res.status(500).json(result.error || "Some error occurred while deleting the record.");
+      res
+        .status(500)
+        .json(result.error || 'Some error occurred while deleting the record.');
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
