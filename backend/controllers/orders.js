@@ -84,12 +84,12 @@ const createorder = async (req, res, next) => {
         console.log('step 3');
         // an id will be automatically generated
         const order = {
-            userId : req.body.userId,
-            productIds : req.body.productIds,
-            total : req.body.total,
-            orderDate : req.body.orderDate,
-            status : req.body.status,
-            shippingAddress : req.body.shippingAddress
+            userId: req.body.userId,
+            productIds: req.body.productIds,
+            total: req.body.total,
+            orderDate: req.body.orderDate,
+            status: req.body.status,
+            shippingAddress: req.body.shippingAddress
         };
         console.log(order);
 
@@ -137,12 +137,12 @@ const updateorder = async (req, res, next) => {
         const objectId = new ObjectId(orderId);
 
         const order = {
-            userId : req.body.userId,
-            productIds : req.body.productIds,
-            total : req.body.total,
-            orderDate : req.body.orderDate,
-            status : req.body.status,
-            shippingAddress : req.body.shippingAddress
+            userId: req.body.userId,
+            productIds: req.body.productIds,
+            total: req.body.total,
+            orderDate: req.body.orderDate,
+            status: req.body.status,
+            shippingAddress: req.body.shippingAddress
         };
 
         await checkId(orderId, 'orders', 'order');

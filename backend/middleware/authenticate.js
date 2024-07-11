@@ -66,7 +66,9 @@ const checkOrderIsNotInDB = async (id) => {
     }
 };
 
-
-
-
-module.exports = { isAuthenticated, checkUserIsInDB, checkUserIsNotInDB, checkOrderIsNotInDB };
+module.exports = {
+    isAuthenticated,
+    checkUserIsInDB,
+    checkUserIsNotInDB,
+    checkOrderIsNotInDB
+};

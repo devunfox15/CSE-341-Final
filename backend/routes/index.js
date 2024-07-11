@@ -21,7 +21,6 @@ router.get(
     passport.authenticate('github'),
     (req, res) => {
         res.redirect('/');
-
     }
 );
 
