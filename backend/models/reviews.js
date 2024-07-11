@@ -53,10 +53,10 @@ model.getOne = async (id) => {
     }
 };
 
-model.create = async (newFood) => {
+model.create = async (newRecord) => {
     try {
         const collection = await getCollection();
-        const response = await collection.insertOne(newFood);
+        const response = await collection.insertOne(newRecord);
 
         return {
             success: response.acknowledged,

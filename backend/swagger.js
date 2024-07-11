@@ -1,4 +1,9 @@
+require('dotenv').config();
 const swaggerAutogen = require('swagger-autogen')();
+
+const { ENV, RENDER_URL, PORT } = process.env;
+const forProd = ENV === 'production';
+const host = forProd ? RENDER_URL : `localhost:${PORT || 8080}`;
 
 const doc = {
     info: {
@@ -6,9 +11,9 @@ const doc = {
         description: 'Final assignment for CSE341'
     },
     // TODO: Update this
-    host: 'localhost:8080',
+    host: host,
     // TODO: Update this to only https once the host has been decided
-    schemes: ['http', 'https'],
+    schemes: forProd ? ['https'] : ['http'],
     definitions: {
         CreateUser: {
             fName: 'MyFirstName',
