@@ -5,10 +5,10 @@
     "description": "Final assignment for CSE341",
     "version": "1.0.0"
   },
-  "host": "cse-341-final-4tb2.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/login": {
@@ -369,7 +369,7 @@
             "in": "body",
             "description": "Add new order.",
             "schema": {
-              "$ref": "#/definitions/Createorder"
+              "$ref": "#/definitions/CreateOrder"
             }
           }
         ],
@@ -435,7 +435,7 @@
             "in": "body",
             "description": "Add new order.",
             "schema": {
-              "$ref": "#/definitions/Updateorder"
+              "$ref": "#/definitions/UpdateOrder"
             }
           }
         ],
@@ -685,6 +685,64 @@
         "role": {
           "type": "string",
           "example": "admin"
+        }
+      }
+    },
+    "CreateOrder": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a2"
+        },
+        "productIds": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a4"
+        },
+        "total": {
+          "type": "number",
+          "example": 49.99
+        },
+        "orderDate": {
+          "type": "string",
+          "example": "2024-06-02"
+        },
+        "status": {
+          "type": "string",
+          "example": "Processing"
+        },
+        "shippingAddress": {
+          "type": "string",
+          "example": "452 Oak St, Othercitytown, USA"
+        }
+      }
+    },
+    "UpdateOrder": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a3"
+        },
+        "productIds": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a4"
+        },
+        "total": {
+          "type": "number",
+          "example": 49.99
+        },
+        "orderDate": {
+          "type": "string",
+          "example": "2024-06-02"
+        },
+        "status": {
+          "type": "string",
+          "example": "Processing"
+        },
+        "shippingAddress": {
+          "type": "string",
+          "example": "452 Oak St, Othercitytown, USA"
         }
       }
     }

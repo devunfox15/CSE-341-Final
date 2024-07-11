@@ -2,7 +2,7 @@ const mongodb = require('../db/database');
 const { ObjectId } = require('mongodb');
 const createError = require('http-errors');
 const { checkId } = require('../middleware/errorChecks');
-const { checkorderIsNotInDB } = require('../middleware/authenticate');
+const { checkOrderIsNotInDB } = require('../middleware/authenticate');
 
 const getAll = async (req, res, next) => {
     //#swagger.tags=['orders']
@@ -73,24 +73,23 @@ const createorder = async (req, res, next) => {
     /*  #swagger.parameters['body'] = {
         in: 'body',
         description: 'Add new order.',
-        schema: { $ref: '#/definitions/Createorder' }
+        schema: { $ref: '#/definitions/CreateOrder' }
     } */
     try {
         console.log('step 1');
         console.log(req.session.order.id);
 
-        // Ensure order does not already exist in DB
-        await checkorderIsNotInDB(req.session.order.id);
+        // Ensure order does not already exist in DB, mostly concerned about the order Id rather then a similar order
+        await checkOrderIsNotInDB(req.session.order.id);
         console.log('step 3');
-
+        // an id will be automatically generated
         const order = {
-            fName: req.body.fName,
-            lName: req.body.lName,
-            email: req.body.email,
-            phone: req.body.phone,
-            address: req.body.address,
-            role: req.body.role,
-            githubId: parseInt(req.session.order.id, 10)
+            userId : req.body.userId,
+            productIds : req.body.productIds,
+            total : req.body.total,
+            orderDate : req.body.orderDate,
+            status : req.body.status,
+            shippingAddress : req.body.shippingAddress
         };
         console.log(order);
 
@@ -121,7 +120,7 @@ const updateorder = async (req, res, next) => {
     /*  #swagger.parameters['body'] = {
         in: 'body',
         description: 'Add new order.',
-        schema: { $ref: '#/definitions/Updateorder' }
+        schema: { $ref: '#/definitions/UpdateOrder' }
     } */
     try {
         const orderId = req.params.id;
@@ -138,13 +137,12 @@ const updateorder = async (req, res, next) => {
         const objectId = new ObjectId(orderId);
 
         const order = {
-            fName: req.body.fName,
-            lName: req.body.lName,
-            email: req.body.email,
-            phone: req.body.phone,
-            address: req.body.address,
-            role: req.body.role,
-            githubId: parseInt(req.session.order.id, 10)
+            userId : req.body.userId,
+            productIds : req.body.productIds,
+            total : req.body.total,
+            orderDate : req.body.orderDate,
+            status : req.body.status,
+            shippingAddress : req.body.shippingAddress
         };
 
         await checkId(orderId, 'orders', 'order');

@@ -46,4 +46,27 @@ const checkUserIsNotInDB = async (id) => {
     }
 };
 
-module.exports = { isAuthenticated, checkUserIsInDB, checkUserIsNotInDB };
+const checkOrderIsNotInDB = async (id) => {
+    try {
+        console.log('step 2');
+        const user = await mongodb
+            .getDb()
+            .db()
+            .collection('orders')
+            .findOne({ githubId: parseInt(id) });
+        console.log(user);
+
+        if (user) {
+            throw new Error(
+                'Current Order already exists. Please adjust quantity in cart'
+            );
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+
+
+module.exports = { isAuthenticated, checkUserIsInDB, checkUserIsNotInDB, checkOrderIsNotInDB };

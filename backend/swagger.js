@@ -30,6 +30,22 @@ const doc = {
             phone: '123-456-0911',
             address: '123 My Place',
             role: 'admin'
+        },
+        CreateOrder:{
+            userId : "650c5812c06bc031e32200a2",
+            productIds : "650c5812c06bc031e32200a4",
+            total : 49.99,
+            orderDate : "2024-06-02",
+            status : "Processing",
+            shippingAddress : "452 Oak St, Othercitytown, USA"
+        },
+        UpdateOrder:{
+            userId : "650c5812c06bc031e32200a3",
+            productIds : "650c5812c06bc031e32200a4",
+            total : 49.99,
+            orderDate : "2024-06-02",
+            status : "Processing",
+            shippingAddress : "452 Oak St, Othercitytown, USA"
         }
     }
 };
