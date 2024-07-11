@@ -5,10 +5,10 @@
     "description": "Final assignment for CSE341",
     "version": "1.0.0"
   },
-  "host": "cse-341-final-4tb2.onrender",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/login": {
