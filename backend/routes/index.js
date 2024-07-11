@@ -39,9 +39,5 @@ router.get(
         });
     }
 );
-// created this route to verify the user is logged in
-router.get('/', (req, res) => {
-        res.send(req.sessio.user !== undefined ? `Logged in as ${req.user.displayName}` : 'Not logged in')
-    });
 
 module.exports = router;
