@@ -29,11 +29,33 @@ store.on('error', function (error) {
     console.error('MongoDBStore connection error:', error);
 });
 
+//TESTING CORS
+// CORS configuration
+const allowedOrigins = [
+    'https://cse-341-final-jg71.onrender.com'
+];
+
 app.use(cors({
-    origin: '*',
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Allow credentials
 }));
+
+// Handle preflight requests
+app.options('*', cors());
+
+//app.use(cors({
+//    origin: '*',
+//    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+//    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+//}));
 
 // Use body-parser middleware
 app.use(bodyParser.json());
