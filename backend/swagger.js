@@ -5,10 +5,16 @@ const { ENV, RENDER_URL, PORT } = process.env;
 const forProd = ENV === 'production';
 const host = forProd ? RENDER_URL : `localhost:${PORT || 8080}`;
 
+const htmlInDescription =
+    `<p>Final assignment for CSE341<p>
+    <p>Authentication links: </p>
+    <a href='/auth'>Login</a><br />
+    <a href='/auth/logout'>Logout</a>`;
+
 const doc = {
     info: {
         title: 'Clothing Store API',
-        description: 'Final assignment for CSE341'
+        description: htmlInDescription
     },
     // TODO: Update this
     host: host,
@@ -48,19 +54,19 @@ const doc = {
             shippingAddress: '452 Oak St, Othercitytown, USA'
         },
         CreateReview: {
-            userId: "650c5812c06bc031e32200a2",
-            productId: "650c5812c06bc031e32200a4",
+            userId: '650c5812c06bc031e32200a2',
+            productId: '650c5812c06bc031e32200a4',
             rating: 4,
-            comment: "Jeans fit well but a bit too long.",
-            reviewDate: "2024-06-06"
+            comment: 'Jeans fit well but a bit too long.',
+            reviewDate: '2024-06-06'
         },
         UpdateReview: {
-            userId: "650c5812c06bc031e32200a2",
-            productId: "650c5812c06bc031e32200a4",
+            userId: '650c5812c06bc031e32200a2',
+            productId: '650c5812c06bc031e32200a4',
             rating: 10,
-            comment: "Jeans fit well but a bit too long.",
-            reviewDate: "2024-06-06"
-        },
+            comment: 'Jeans fit well but a bit too long.',
+            reviewDate: '2024-06-06'
+        }
     }
 };
 

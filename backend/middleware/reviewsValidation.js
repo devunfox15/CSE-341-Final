@@ -16,9 +16,7 @@ const requiredStringRule = (fieldName, errorMessage) => {
 const validationRules = () => [
     requiredStringRule('userId'),
     requiredStringRule('productId'),
-    requiredRule('rating')
-        .isNumeric()
-        .withMessage('rating should be a number'),
+    requiredRule('rating').isNumeric().withMessage('rating should be a number'),
     requiredStringRule('comment'),
     requiredStringRule('reviewDate')
 ];
