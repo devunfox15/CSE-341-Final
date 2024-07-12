@@ -110,7 +110,7 @@ app.get(
         req.session.user = req.user; // Ensure req.user is correctly populated
         console.log('req.session.user:', req.session.user);
         console.log('req.session.user:', req.session.user);
-        console.log('req.session.user.id:', req.session.user ? req.session.user.id : 'undefined');
+        console.log('req.session.user.id:', req.session.user ? req.session.user.id : 'undefined'); // error seems to be here
         req.session.save((err) => {
             if (err) {
                 console.error('Session save error:', err);
