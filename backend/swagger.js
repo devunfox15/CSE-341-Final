@@ -5,8 +5,7 @@ const { ENV, RENDER_URL, PORT } = process.env;
 const forProd = ENV === 'production';
 const host = forProd ? RENDER_URL : `localhost:${PORT || 8080}`;
 
-const htmlInDescription =
-    `<p>Final assignment for CSE341<p>
+const htmlInDescription = `<p>Final assignment for CSE341<p>
     <p>Authentication links: </p>
     <a href='/auth'>Login</a><br />
     <a href='/auth/logout'>Logout</a>`;
