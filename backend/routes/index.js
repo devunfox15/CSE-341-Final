@@ -15,7 +15,7 @@ router.get(
     '/login',
     passport.authenticate('github'),
     (req, res) => {
-        console.log('Login endpoint hit')
+        console.log('Login endpoint hit');
         res.redirect('/');
     }
 );
