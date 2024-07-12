@@ -30,12 +30,17 @@ ctrl.getSingle = async (req, res) => {
 ctrl.create = async (req, res) => {
     // #swagger.tags = ["Reviews"]
     // #swagger.description = "This endpoint requires authentication. For logging in visit '/auth' page."
+    /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Add new review.',
+        schema: { $ref: '#/definitions/CreateReview' }
+    } */
 
     try {
         const newRecord = {
             userId: req.body.userId,
             productId: req.body.productId,
-            rating: req.body.rating,
+            rating: parseInt(req.body.rating, 10),
             comment: req.body.comment,
             reviewDate: req.body.reviewDate
         };
@@ -56,6 +61,12 @@ ctrl.create = async (req, res) => {
 ctrl.update = async (req, res) => {
     // #swagger.tags = ["Reviews"]
     // #swagger.description = "This endpoint requires authentication. For logging in visit '/auth' page."
+    /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Update review.',
+        schema: { $ref: '#/definitions/UpdateReview' }
+    } */
+
     try {
         const record = {
             userId: req.body.userId,

@@ -1,22 +1,24 @@
 const { check, validationResult } = require('express-validator');
 
+const requiredRule = (fieldName) => {
+    return check(fieldName)
+        .trim()
+        .notEmpty()
+        .withMessage(`${fieldName} is required.`);
+};
+
 const requiredStringRule = (fieldName, errorMessage) => {
-    return (
-        check(fieldName, errorMessage)
-            .trim()
-            .notEmpty()
-            .withMessage(`${fieldName} is required.`)
-            .isString()
-            // .not()
-            // .isNumeric()
-            .withMessage(`${fieldName} should be a string`)
-    );
+    return requiredRule(fieldName)
+        .isString()
+        .withMessage(`${fieldName} should be a string`);
 };
 
 const validationRules = () => [
     requiredStringRule('userId'),
     requiredStringRule('productId'),
-    requiredStringRule('rating'),
+    requiredRule('rating')
+        .isNumeric()
+        .withMessage('rating should be a number'),
     requiredStringRule('comment'),
     requiredStringRule('reviewDate')
 ];

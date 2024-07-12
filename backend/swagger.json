@@ -5,10 +5,10 @@
     "description": "Final assignment for CSE341",
     "version": "1.0.0"
   },
-  "host": "cse-341-final-4tb2.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/login": {
@@ -67,25 +67,9 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Add new review.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                },
-                "productId": {
-                  "example": "any"
-                },
-                "rating": {
-                  "example": "any"
-                },
-                "comment": {
-                  "example": "any"
-                },
-                "reviewDate": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/CreateReview"
             }
           }
         ],
@@ -144,25 +128,9 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Update review.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                },
-                "productId": {
-                  "example": "any"
-                },
-                "rating": {
-                  "example": "any"
-                },
-                "comment": {
-                  "example": "any"
-                },
-                "reviewDate": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/UpdateReview"
             }
           }
         ],
@@ -743,6 +711,56 @@
         "shippingAddress": {
           "type": "string",
           "example": "452 Oak St, Othercitytown, USA"
+        }
+      }
+    },
+    "CreateReview": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a2"
+        },
+        "productId": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a4"
+        },
+        "rating": {
+          "type": "number",
+          "example": 4
+        },
+        "comment": {
+          "type": "string",
+          "example": "Jeans fit well but a bit too long."
+        },
+        "reviewDate": {
+          "type": "string",
+          "example": "2024-06-06"
+        }
+      }
+    },
+    "UpdateReview": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a2"
+        },
+        "productId": {
+          "type": "string",
+          "example": "650c5812c06bc031e32200a4"
+        },
+        "rating": {
+          "type": "number",
+          "example": 10
+        },
+        "comment": {
+          "type": "string",
+          "example": "Jeans fit well but a bit too long."
+        },
+        "reviewDate": {
+          "type": "string",
+          "example": "2024-06-06"
         }
       }
     }

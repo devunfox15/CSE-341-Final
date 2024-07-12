@@ -46,7 +46,21 @@ const doc = {
             orderDate: '2024-06-02',
             status: 'Processing',
             shippingAddress: '452 Oak St, Othercitytown, USA'
-        }
+        },
+        CreateReview: {
+            userId: "650c5812c06bc031e32200a2",
+            productId: "650c5812c06bc031e32200a4",
+            rating: 4,
+            comment: "Jeans fit well but a bit too long.",
+            reviewDate: "2024-06-06"
+        },
+        UpdateReview: {
+            userId: "650c5812c06bc031e32200a2",
+            productId: "650c5812c06bc031e32200a4",
+            rating: 10,
+            comment: "Jeans fit well but a bit too long.",
+            reviewDate: "2024-06-06"
+        },
     }
 };
 
