@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/database');
@@ -23,17 +23,16 @@ store.on('error', function (error) {
     console.error('MongoDBStore connection error:', error);
 });
 
-// Use cors middleware
-app.use(
-    cors({
-        methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-        origin: '*'
-    })
-);
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+}));
 
 // Use body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Configure express-session middleware
 app.use(
@@ -125,12 +124,6 @@ mongodb.initDb((err) => {
         });
     }
 });
-
-//// Error handling middleware
-//app.use((err, req, res, next) => {
-//    console.error(err.stack);
-//    res.status(500).send('Internal Server Error');
-//});
 
 // Error handler for 404
 app.use((req, res, next) => {
