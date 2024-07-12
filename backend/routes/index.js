@@ -1,11 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-//commenting out so we can see logged in/out status
-//router.get('/', (req, res) => {
-//    //#swagger tags=["Hello World!"]
-//    res.send('Hello World!');
-//});
 router.use('/reviews', require('./reviews'));
 router.use('/users', require('./users'));
 router.use('/orders', require('./orders'));
@@ -20,6 +15,7 @@ router.get(
     '/login',
     passport.authenticate('github'),
     (req, res) => {
+        console.log('Login endpoint hit')
         res.redirect('/');
     }
 );
@@ -30,6 +26,7 @@ router.get(
     //#swagger.description='This endpoint is used to logout.'
     '/logout',
     function (req, res, next) {
+        console.log('Logout endpoint hit');
         req.logout(function (err) {
             if (err) {
                 return next(err);
