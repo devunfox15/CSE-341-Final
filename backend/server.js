@@ -13,6 +13,12 @@ const createError = require('http-errors');
 const port = process.env.PORT || 8080;
 const app = express();
 
+//add swagger docs here for production
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Configure MongoDBStore
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
