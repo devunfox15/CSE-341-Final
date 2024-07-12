@@ -44,7 +44,7 @@ app.use(
         store: store, // Use MongoDBStore as session store
         cookie: {
             maxAge: 1000 * 60 * 60 * 24, // Session expiration in milliseconds (e.g., 1 day)
-            secure: process.env.NODE_ENV === 'production' ? true : false, // Secure cookie in production
+            secure: process.env.NODE_ENV === 'production' ? true : false, // Secure cookie in production  //TODO === 'production'
             sameSite: 'strict' // Restrict cookie to same-site requests
         }
     })
@@ -63,6 +63,9 @@ passport.use(
             callbackURL: process.env.CALLBACK_URL
         },
         function (accessToken, refreshToken, profile, done) {
+            console.log("GitHub strategy callback hit");
+            console.log("Access token:", accessToken);
+            console.log("Profile:", profile);
             return done(null, profile);
         }
     )
@@ -70,10 +73,12 @@ passport.use(
 
 // Passport serialization
 passport.serializeUser((user, done) => {
+    console.log("Serializing user:", user);
     done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
+    console.log("Deserializing user:", user);
     done(null, user);
 });
 
@@ -82,6 +87,8 @@ app.use('/', indexRoutes);
 
 // OAuth endpoints
 app.get('/', (req, res) => {
+    console.log("Root endpoint hit");
+    console.log("User session:", req.session.user);
     res.send(
         req.session.user !== undefined
             ? `Logged in as ${req.session.user.displayName}`
@@ -94,12 +101,11 @@ app.get(
     '/github/callback',
     passport.authenticate('github', { failureRedirect: '/', session: true }),
     (req, res) => {
+        console.log("GitHub callback endpoint hit");
         req.session.user = req.user; // Ensure req.user is correctly populated
         console.log('req.session.user:', req.session.user);
-        console.log(
-            'req.session.user.id:',
-            req.session.user ? req.session.user.id : 'undefined'
-        );
+        console.log('req.session.user:', req.session.user);
+        console.log('req.session.user.id:', req.session.user ? req.session.user.id : 'undefined');
         req.session.save((err) => {
             if (err) {
                 console.error('Session save error:', err);
@@ -133,6 +139,7 @@ app.use((req, res, next) => {
 
 // General error handler
 app.use((err, req, res, next) => {
+    console.error("Error occurred:", err);
     res.status(err.status || 500);
     res.send({
         error: {
