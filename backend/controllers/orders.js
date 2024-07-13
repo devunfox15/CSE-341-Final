@@ -77,12 +77,9 @@ const createorder = async (req, res, next) => {
     } */
     try {
         console.log('step 1');
-        console.log(req.session.order.id);
 
         // Ensure order does not already exist in DB, mostly concerned about the order Id rather then a similar order
-        await checkOrderIsNotInDB(req.session.order.id);
-        console.log('step 3');
-        // an id will be automatically generated
+        // // an id will be automatically generated
         const order = {
             userId: req.body.userId,
             productIds: req.body.productIds,
