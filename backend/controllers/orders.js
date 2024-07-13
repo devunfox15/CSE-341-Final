@@ -86,8 +86,8 @@ const createorder = async (req, res, next) => {
         const order = {
             userId: req.body.userId,
             productIds: req.body.productIds,
-            totalPrice: req.body.totalPrice,
-            orderDate: parseFloat(req.body.orderDate),
+            total: parseFloat(req.body.total),
+            orderDate: req.body.orderDate,
             status: req.body.status,
             shippingAddress: req.body.shippingAddress
         };
@@ -139,7 +139,7 @@ const updateorder = async (req, res, next) => {
         const order = {
             userId: req.body.userId,
             productIds: req.body.productIds,
-            totalPrice: parseFloat(req.body.totalPrice),
+            total: parseFloat(req.body.total),
             orderDate: req.body.orderDate,
             status: req.body.status,
             shippingAddress: req.body.shippingAddress

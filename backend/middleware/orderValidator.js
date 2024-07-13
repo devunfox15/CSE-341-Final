@@ -10,7 +10,7 @@ const orderValidationRules = () => {
             .notEmpty()
             .withMessage('An Array of productId is required'),
         // totalPrice must be a float and is required
-        body('totalPrice')
+        body('total')
             .isNumeric()
             .withMessage('total is required'),
         // orderDate must be a string and is required
