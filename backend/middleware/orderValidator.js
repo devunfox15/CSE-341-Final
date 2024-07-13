@@ -6,7 +6,6 @@ const orderValidationRules = () => {
         body('userId').isString().notEmpty().withMessage('userId is required'),
         // productIds must be an array and is required
         body('productIds')
-            .isArray()
             .notEmpty()
             .withMessage('An Array of productId is required'),
         // totalPrice must be a float and is required
