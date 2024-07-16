@@ -14,20 +14,28 @@
         "swagger-ui-express": "^5.0.1"
     },
     "devDependencies": {
+        "jest": "^29.7.0",
         "nodemon": "^3.1.4",
         "prettier": "^3.3.2",
+        "supertest": "^7.0.0",
         "swagger-autogen": "^2.23.7"
     },
     "name": "backend",
     "version": "1.0.0",
     "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "start": "npm run swagger & nodemon server.js",
         "swagger": "node ./swagger.js",
         "swagger:prod": "NODE_ENV=production npm run swagger",
         "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-        "build": "npm run swagger:prod & npm run format"
+        "build": "npm run swagger:prod & npm run format",
+        "test": "jest"
+    },
+    "jest": {
+        "collectCoverage": true,
+        "coverageReporters": [
+            "html"
+        ]
     },
     "keywords": [],
     "author": "",
