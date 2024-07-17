@@ -55,6 +55,24 @@ beforeAll(async () => {
 
     await usersCollection.insertOne(user);
     //const testResult = await usersCollection.find().toArray();
+
+
+    // adding an order to the Mock database
+    const orderCollection = dbClient.db().collection('orders');
+    const order = {
+        userId: { "$oid": "650c5812c06bc031e32200a1" },
+        productIds:[
+            { "$oid": "650c5812c06bc031e32200a3" },
+            { "$oid": "650c5812c06bc031e32200a4" }
+        ],
+        totalPrice: 69.98,
+        orderDate: "2024-06-01",
+        status: "Shipped",
+        shippingAddress: "123 Main St, Anytown, USA", 
+    };
+
+    await orderCollection.insertOne(order);
+
 });
 
 describe('GET /users', () => {
@@ -75,6 +93,27 @@ describe('GET /users', () => {
 
     });
 });
+
+// test case for GET /orders/
+describe('GET /orders', () => {
+    it('should return all orders', async () => {
+        const response = await request(app).get('/orders').expect(200);
+            expect(response.body).toEqual(expect.arrayContaining([ // check that the response body contains an array of orders
+                expect.objectContaining({
+                    userId: { "$oid": "650c5812c06bc031e32200a1" },
+                    productIds: [
+                        { "$oid": "650c5812c06bc031e32200a3" },
+                        { "$oid": "650c5812c06bc031e32200a4" }
+                    ],
+                    totalPrice: 69.98,
+                    orderDate: "2024-06-01",
+                    status: "Shipped",
+                    shippingAddress: "123 Main St, Anytown, USA",
+            }), 
+        ]));
+    });
+    
+})
 
 //kill everything
 afterAll(async () => {
