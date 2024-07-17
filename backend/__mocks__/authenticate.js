@@ -1,12 +1,6 @@
-//not used
-const mongodb = require('./database');
+const mongodb = require('../db/database');
 
 const isAuthenticated = (req, res, next) => {
-    //if (!req.session.user || !req.session.user.id) {
-    //    console.log('User session is undefined or does not have an id');
-    //    return res.status(401).json('You do not have access.');
-    //}
-    console.log('Authenticated middleware called');
     next();
 };
 
