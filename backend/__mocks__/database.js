@@ -29,7 +29,13 @@ const getDb = () => {
     return _mongoClient;
 };
 
+const getCollection = async (collectionName) => {
+    const dbClient = getDb();
+    return await dbClient.db().collection(collectionName);
+};
+
 module.exports = {
     initDb,
     getDb,
+    getCollection
 };
