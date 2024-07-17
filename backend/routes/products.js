@@ -15,7 +15,12 @@ router.get('/:id', productController.getById);
 router.post('/', validationRules(), validate, productController.createProduct);
 
 // Update product data (PUT)
-router.put('/:id', validationRules(), validate, productController.updateProduct);
+router.put(
+    '/:id',
+    validationRules(),
+    validate,
+    productController.updateProduct
+);
 
 // Delete individual product (DELETE)
 router.delete('/:id', productController.deleteProduct);

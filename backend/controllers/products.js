@@ -35,7 +35,10 @@ const getById = async (req, res, next) => {
 
         if (!ObjectId.isValid(productId)) {
             return next(
-                createError(400,'Invalid product ID format. Must be a valid ObjectId')
+                createError(
+                    400,
+                    'Invalid product ID format. Must be a valid ObjectId'
+                )
             );
         }
 
@@ -99,7 +102,10 @@ const updateProduct = async (req, res, next) => {
 
         if (!ObjectId.isValid(productId)) {
             return next(
-                createError(400,'Invalid product ID format. Must be a valid ObjectId')
+                createError(
+                    400,
+                    'Invalid product ID format. Must be a valid ObjectId'
+                )
             );
         }
 
@@ -141,7 +147,10 @@ const deleteProduct = async (req, res, next) => {
 
         if (!ObjectId.isValid(productId)) {
             return next(
-                createError(400, 'Invalid product ID format. Must be a valid ObjectId')
+                createError(
+                    400,
+                    'Invalid product ID format. Must be a valid ObjectId'
+                )
             );
         }
 
