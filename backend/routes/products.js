@@ -3,7 +3,7 @@ const productController = require('../controllers/products');
 const {
     validationRules,
     validate
-} = require('../middleware/reviewsValidation');
+} = require('../middleware/productsValidation');
 
 // List all products (GET)
 router.get('/', productController.getAll);
@@ -12,12 +12,12 @@ router.get('/', productController.getAll);
 router.get('/:id', productController.getById);
 
 // Create new product (POST)
-router.post('/', validationRules(), validate, productController.createProduct);
+router.post('/', productValidationRules(), validate, productController.createProduct);
 
 // Update product data (PUT)
 router.put(
     '/:id',
-    validationRules(),
+    productValidationRules(),
     validate,
     productController.updateProduct
 );

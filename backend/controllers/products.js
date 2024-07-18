@@ -70,7 +70,7 @@ const createProduct = async (req, res, next) => {
         const product = {
             name: req.body.name,
             description: req.body.description,
-            price: req.body.price,
+            price: parseFloat(req.body.price),
             category: req.body.category,
             size: req.body.size,
             color: req.body.color
@@ -114,7 +114,7 @@ const updateProduct = async (req, res, next) => {
         const product = {
             name: req.body.name,
             description: req.body.description,
-            price: req.body.price,
+            price: parseFloat(req.body.price),
             category: req.body.category,
             size: req.body.size,
             color: req.body.color
