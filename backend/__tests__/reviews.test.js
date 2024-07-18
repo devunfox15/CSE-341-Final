@@ -52,6 +52,7 @@ beforeAll(async () => {
     // Seeding test review data
     const reviewsCollection = dbClient.db().collection('reviews');
     const review = {
+        _id: new ObjectId('650c5812c06bc031e32200a1'),
         userId: { $oid: '650c5812c06bc031e32200a2' },
         productId: '650c5812c06bc031e32200a4',
         rating: 4,
@@ -76,6 +77,25 @@ describe('GET /reviews', () => {
                     reviewDate: '2024-06-06'
                 })
             ])
+        );
+    });
+});
+
+describe('GET /reviews/:id', () => {
+    it('should return single review', async () => {
+        const reviewId = '650c5812c06bc031e32200a1';
+        const response = await request(app)
+            .get(`/reviews/${reviewId}`)
+            .expect(200);
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                _id: reviewId,
+                userId: { $oid: '650c5812c06bc031e32200a2' },
+                productId: '650c5812c06bc031e32200a4',
+                rating: 4,
+                comment: 'Jeans fit well but a bit too long.',
+                reviewDate: '2024-06-06'
+            })
         );
     });
 });
