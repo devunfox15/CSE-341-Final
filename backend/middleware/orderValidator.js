@@ -3,15 +3,17 @@ const { body, validationResult } = require('express-validator');
 const orderValidationRules = () => {
     return [
         // userId must be a string and is required
-        body('userId').isString().withMessage('needs to be a string').notEmpty().withMessage('userId is required'),
+        body('userId')
+            .isString()
+            .withMessage('needs to be a string')
+            .notEmpty()
+            .withMessage('userId is required'),
         // productIds must be an array and is required
         body('productIds')
             .notEmpty()
             .withMessage('An Array of productId is required'),
         // totalPrice must be a float and is required
-        body('total')
-            .isNumeric()
-            .withMessage('total is required'),
+        body('total').isNumeric().withMessage('total is required'),
         // orderDate must be a string and is required
         body('orderDate')
             .isString()

@@ -27,10 +27,11 @@ app.use('/', indexRoutes);
 
 //switch to this way to mock auth module so we can add other methods later if needed.
 jest.mock('../middleware/authenticate');
-const auth = require('../middleware/authenticate')
-const mockAuth = require('../__mocks__/authenticate')
-jest.spyOn(auth, 'isAuthenticated').mockImplementation(mockAuth.isAuthenticated);
-
+const auth = require('../middleware/authenticate');
+const mockAuth = require('../__mocks__/authenticate');
+jest.spyOn(auth, 'isAuthenticated').mockImplementation(
+    mockAuth.isAuthenticated
+);
 
 //Setup the mongodb in memory for testing
 let dbClient;
@@ -49,7 +50,7 @@ beforeAll(async () => {
     });
 
     // Seed the database with USER data
-    const usersCollection = dbClient.db().collection('users');    
+    const usersCollection = dbClient.db().collection('users');
     const user = {
         _id: new ObjectId('650c5812c06bc031e32200a1'),
         fName: 'Bill',
@@ -59,11 +60,11 @@ beforeAll(async () => {
         address: '123 Microsoft Way',
         role: 'admin',
         githubId: 12345678
-    };    
+    };
     await usersCollection.insertOne(user);
     //const response = await usersCollection.find().toArray();
     //console.table(response)
-    
+
     // adding an order to the Mock database
     const orderCollection = dbClient.db().collection('orders');
     const order = {
@@ -92,6 +93,17 @@ beforeAll(async () => {
     };
 
     await productCollection.insertOne(product);
+
+    // Seeding test review data
+    const reviewsCollection = dbClient.db().collection('reviews');
+    const review = {
+        userId: { $oid: '650c5812c06bc031e32200a2' },
+        productId: '650c5812c06bc031e32200a4',
+        rating: 4,
+        comment: 'Jeans fit well but a bit too long.',
+        reviewDate: '2024-06-06'
+    };
+    await reviewsCollection.insertOne(review);
 });
 
 // Unit Test for Users
@@ -99,7 +111,7 @@ describe('GET /users', () => {
     describe('GET ALL USERS', () => {
         it('should return all users', async () => {
             const response = await request(app).get('/users').expect(200);
-    
+
             expect(response.body).toEqual(
                 expect.arrayContaining([
                     expect.objectContaining({
@@ -114,12 +126,14 @@ describe('GET /users', () => {
                 ])
             );
         });
-    })
+    });
     describe('GET USER BY ID', () => {
         it('should return single user', async () => {
             const userId = '650c5812c06bc031e32200a1';
-            const response = await request(app).get(`/users/${userId}`).expect(200);
-    
+            const response = await request(app)
+                .get(`/users/${userId}`)
+                .expect(200);
+
             expect(response.body).toEqual(
                 expect.objectContaining({
                     _id: userId,
@@ -172,6 +186,25 @@ describe('GET /products', () => {
                     category: 'Clothing',
                     size: 'M',
                     color: 'Blue'
+                })
+            ])
+        );
+    });
+});
+
+// test case for GET /reviews/
+describe('GET /reviews', () => {
+    it('should return all reviews', async () => {
+        const response = await request(app).get('/reviews').expect(200);
+        expect(response.body).toEqual(
+            expect.arrayContaining([
+                // check that the response body contains an array of reviews
+                expect.objectContaining({
+                    userId: { $oid: '650c5812c06bc031e32200a2' },
+                    productId: '650c5812c06bc031e32200a4',
+                    rating: 4,
+                    comment: 'Jeans fit well but a bit too long.',
+                    reviewDate: '2024-06-06'
                 })
             ])
         );
