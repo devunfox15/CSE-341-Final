@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.23% </span>
+                <span class="strong">60.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/67</span>
+                <span class='fraction'>41/68</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/20</span>
+                <span class='fraction'>5/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>2/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.23% </span>
+                <span class="strong">60.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/67</span>
+                <span class='fraction'>41/68</span>
             </div>
         
             
@@ -236,7 +236,8 @@
 <a name='L171'></a><a href='#L171'>171</a>
 <a name='L172'></a><a href='#L172'>172</a>
 <a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -274,8 +275,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,9 +352,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -409,7 +410,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">require('dotenv').config();
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/database');
@@ -446,10 +448,10 @@ const allowedOrigins = ['https://cse-341-final-jg71.onrender.com'];
 &nbsp;
 app.use(
     cors({
-        origin: <span class="fstat-no" title="function not covered" >fu</span>nction (origin, callback) {
-<span class="cstat-no" title="statement not covered" >            if (!origin || allowedOrigins.includes(origin)) {</span>
-<span class="cstat-no" title="statement not covered" >                callback(null, true);</span>
-            } else {
+        origin: function (origin, callback) {
+            if (!origin || <span class="branch-1 cbranch-no" title="branch not covered" >allowedOrigins.includes(origin))</span> {
+                callback(null, true);
+            } else <span class="missing-if-branch" title="else path not taken" >E</span>{
 <span class="cstat-no" title="statement not covered" >                callback(new Error('Not allowed by CORS'));</span>
             }
         },
@@ -523,12 +525,12 @@ passport.deserializeUser(<span class="fstat-no" title="function not covered" >(u
 app.use('/', indexRoutes);
 &nbsp;
 // OAuth endpoints
-app.get('/', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    console.log('Root endpoint hit');</span>
-<span class="cstat-no" title="statement not covered" >    console.log('User session:', req.session.user);</span>
-<span class="cstat-no" title="statement not covered" >    res.send(</span>
+app.get('/', (req, res) =&gt; {
+    console.log('Root endpoint hit');
+    console.log('User session:', req.session.user);
+    res.send(
         req.session.user !== undefined
-            ? `Logged in as ${req.session.user.displayName}`
+            ? <span class="branch-0 cbranch-no" title="branch not covered" >`Logged in as ${req.session.user.displayName}`</span>
             : 'Logged Out'
     );
 });
@@ -582,14 +584,15 @@ app.use(<span class="fstat-no" title="function not covered" >(e</span>rr, req, r
         }
     });
 });
-&nbsp;</pre></td></tr></table></pre>
+&nbsp;
+module.exports = app</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-16T04:33:53.947Z
+                at 2024-07-18T03:07:19.715Z
             </div>
         <script src="../prettify.js"></script>
         <script>
