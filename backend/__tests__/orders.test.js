@@ -52,6 +52,7 @@ beforeAll(async () => {
     // adding an order to the Mock database
     const orderCollection = dbClient.db().collection('orders');
     const order = {
+        _id: new ObjectId('650c5812c06bc031e32200a2'),
         userId: { $oid: '650c5812c06bc031e32200a1' },
         productIds: [
             { $oid: '650c5812c06bc031e32200a3' },
@@ -85,6 +86,31 @@ describe('GET /orders', () => {
                     shippingAddress: '123 Main St, Anytown, USA'
                 })
             ])
+        );
+    });
+});
+
+
+describe('GET /orders/:id', () => {
+    it('should return one order', async () => {
+        const orderId = '650c5812c06bc031e32200a2';
+        const response = await request(app)
+        .get(`/orders/${orderId}`)
+        .expect(200);
+
+        expect(response.body).toEqual(
+                expect.objectContaining({
+                    _id : orderId,
+                    userId: { $oid: '650c5812c06bc031e32200a1' },
+                    productIds: [
+                        { $oid: '650c5812c06bc031e32200a3' },
+                        { $oid: '650c5812c06bc031e32200a4' }
+                    ],
+                    totalPrice: 69.98,
+                    orderDate: '2024-06-01',
+                    status: 'Shipped',
+                    shippingAddress: '123 Main St, Anytown, USA'
+                })
         );
     });
 });
