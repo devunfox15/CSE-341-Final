@@ -8,7 +8,7 @@ const productValidationRules = () => {
             .withMessage('Product name must be a string')
             .notEmpty()
             .withMessage('Product name is required'),
-            
+
         // Product description must be an array and is required
         body('description')
             .isString()

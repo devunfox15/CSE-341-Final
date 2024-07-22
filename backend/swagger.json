@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Clothing Store API",
-        "description": "Final assignment for CSE341",
+        "description": "<p>Final assignment for CSE341<p>\n    <p>Authentication links: </p>\n    <a href='/auth'>Login</a><br />\n    <a href='/auth/logout'>Logout</a>",
         "version": "1.0.0"
     },
     "host": "cse-341-final-jg71.onrender.com",

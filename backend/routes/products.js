@@ -12,7 +12,12 @@ router.get('/', productController.getAll);
 router.get('/:id', productController.getById);
 
 // Create new product (POST)
-router.post('/', productValidationRules(), validate, productController.createProduct);
+router.post(
+    '/',
+    productValidationRules(),
+    validate,
+    productController.createProduct
+);
 
 // Update product data (PUT)
 router.put(

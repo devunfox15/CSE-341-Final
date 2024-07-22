@@ -34,7 +34,6 @@ beforeAll(async () => {
             }
         });
     });
-
 });
 
 describe('GET /', () => {
