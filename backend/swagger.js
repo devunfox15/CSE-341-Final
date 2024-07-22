@@ -5,10 +5,15 @@ const { NODE_ENV, RENDER_URL, PORT } = process.env;
 const forProd = NODE_ENV === 'production';
 const host = forProd ? RENDER_URL : `localhost:${PORT || 8080}`;
 
+const htmlInDescription = `<p>Final assignment for CSE341<p>
+    <p>Authentication links: </p>
+    <a href='/auth'>Login</a><br />
+    <a href='/auth/logout'>Logout</a>`;
+
 const doc = {
     info: {
         title: 'Clothing Store API',
-        description: 'Final assignment for CSE341'
+        description: htmlInDescription
     },
     // TODO: Update this
     host: host,
