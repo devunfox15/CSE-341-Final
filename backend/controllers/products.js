@@ -1,5 +1,7 @@
 const mongodb = require('../db/database');
+const { ObjectId } = require('mongodb');
 const createError = require('http-errors');
+const { checkId } = require('../middleware/errorChecks');
 
 const getAll = async (req, res, next) => {
     //#swagger.tags=['Products']
@@ -12,6 +14,7 @@ const getAll = async (req, res, next) => {
             .collection('products')
             .find()
             .toArray();
+
         if (!result.length) {
             return next(createError(404, 'No product data was found.'));
         }
@@ -29,11 +32,24 @@ const getById = async (req, res, next) => {
     //#swagger.description='Retrieves data for the specified product.'
     try {
         const productId = req.params.id;
+
+        if (!ObjectId.isValid(productId)) {
+            return next(
+                createError(
+                    400,
+                    'Invalid product ID format. Must be a valid ObjectId'
+                )
+            );
+        }
+
+        await checkId(productId, 'products', 'Product');
+
+        const objectId = new ObjectId(productId);
         const response = await mongodb
             .getDb()
             .db()
             .collection('products')
-            .findOne({ _id: productId });
+            .findOne({ _id: objectId });
 
         if (!response) {
             return next(createError(404, 'No such product was found.'));
@@ -54,7 +70,7 @@ const createProduct = async (req, res, next) => {
         const product = {
             name: req.body.name,
             description: req.body.description,
-            price: req.body.price,
+            price: parseFloat(req.body.price),
             category: req.body.category,
             size: req.body.size,
             color: req.body.color
@@ -83,19 +99,32 @@ const updateProduct = async (req, res, next) => {
     //#swagger.description='Updates an existing product.'
     try {
         const productId = req.params.id;
+
+        if (!ObjectId.isValid(productId)) {
+            return next(
+                createError(
+                    400,
+                    'Invalid product ID format. Must be a valid ObjectId'
+                )
+            );
+        }
+
+        await checkId(productId, 'products', 'Product');
+
         const product = {
             name: req.body.name,
             description: req.body.description,
-            price: req.body.price,
+            price: parseFloat(req.body.price),
             category: req.body.category,
             size: req.body.size,
             color: req.body.color
         };
+        const objectId = new ObjectId(productId);
         const response = await mongodb
             .getDb()
             .db()
             .collection('products')
-            .replaceOne({ _id: productId }, product);
+            .replaceOne({ _id: objectId }, product);
 
         if (response.modifiedCount > 0) {
             res.status(204).send();
@@ -115,11 +144,24 @@ const deleteProduct = async (req, res, next) => {
     //#swagger.description='Deletes the specified product from the database.'
     try {
         const productId = req.params.id;
+
+        if (!ObjectId.isValid(productId)) {
+            return next(
+                createError(
+                    400,
+                    'Invalid product ID format. Must be a valid ObjectId'
+                )
+            );
+        }
+
+        await checkId(productId, 'products', 'Product');
+
+        const objectId = new ObjectId(productId);
         const result = await mongodb
             .getDb()
             .db()
             .collection('products')
-            .deleteOne({ _id: productId });
+            .deleteOne({ _id: objectId });
 
         if (result.deletedCount > 0) {
             res.status(204).send();

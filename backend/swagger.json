@@ -1,768 +1,712 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Clothing Store API",
-    "description": "<p>Final assignment for CSE341<p>\n    <p>Authentication links: </p>\n    <a href='/auth'>Login</a><br />\n    <a href='/auth/logout'>Logout</a>",
-    "version": "1.0.0"
-  },
-  "host": "cse-341-final-4tb2.onrender.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "paths": {
-    "/login": {
-      "get": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Authenticate User using Github. Cannot be done from here. Visit /login",
-        "description": "This endpoint is used to login.",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
+    "swagger": "2.0",
+    "info": {
+        "title": "Clothing Store API",
+        "description": "Final assignment for CSE341",
+        "version": "1.0.0"
     },
-    "/logout": {
-      "get": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Logout Authenticated User. Cannot be done from here. Visit /logout",
-        "description": "This endpoint is used to logout.",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/reviews/": {
-      "get": {
-        "tags": [
-          "Reviews"
-        ],
-        "summary": "GET all",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Reviews"
-        ],
-        "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Add new review.",
-            "schema": {
-              "$ref": "#/definitions/CreateReview"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/reviews/{id}": {
-      "get": {
-        "tags": [
-          "Reviews"
-        ],
-        "summary": "GET by id",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Reviews"
-        ],
-        "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Update review.",
-            "schema": {
-              "$ref": "#/definitions/UpdateReview"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Reviews"
-        ],
-        "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/users/": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Retrieve a list of all users",
-        "description": "Must be Authenticated via Github 1st. This endpoint retrieves all users available in the database.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Create a new user",
-        "description": "Must be Authenticated via Github 1st. This endpoint creates a new user in the database.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Add new user.",
-            "schema": {
-              "$ref": "#/definitions/CreateUser"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get an user by ID",
-        "description": "Must be Authenticated via Github 1st. This endpoint retrieves a specific user by its ID.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "value": "650c5812c06bc031e32200a1"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Update an existing user",
-        "description": "Must be Authenticated via Github 1st. This endpoint updates an existing user in the database.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Add new user.",
-            "schema": {
-              "$ref": "#/definitions/UpdateUser"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Delete an user",
-        "description": "Must be Authenticated via Github 1st. This endpoint deletes a specific user by its ID from the database.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/orders/": {
-      "get": {
-        "tags": [
-          "orders"
-        ],
-        "summary": "Retrieve a list of all orders",
-        "description": "Must be Authenticated via Github 1st. This endpoint retrieves all orders available in the database.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "orders"
-        ],
-        "summary": "Create a new order",
-        "description": "Must be Authenticated via Github 1st. This endpoint creates a new order in the database.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Add new order.",
-            "schema": {
-              "$ref": "#/definitions/CreateOrder"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/orders/{id}": {
-      "get": {
-        "tags": [
-          "orders"
-        ],
-        "summary": "Get an order by ID",
-        "description": "Must be Authenticated via Github 1st. This endpoint retrieves a specific order by its ID.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "value": "650c5812c06bc031e32200a1"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "orders"
-        ],
-        "summary": "Update an existing order",
-        "description": "Must be Authenticated via Github 1st. This endpoint updates an existing order in the database.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Add new order.",
-            "schema": {
-              "$ref": "#/definitions/UpdateOrder"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "orders"
-        ],
-        "summary": "Delete an order",
-        "description": "Must be Authenticated via Github 1st. This endpoint deletes a specific order by its ID from the database.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/products/": {
-      "get": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Get a list of all products.",
-        "description": "Retrieves all products from the database.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Create a new product.",
-        "description": "Adds a new product to the database.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "price": {
-                  "example": "any"
-                },
-                "category": {
-                  "example": "any"
-                },
-                "size": {
-                  "example": "any"
-                },
-                "color": {
-                  "example": "any"
+    "host": "cse-341-final-jg71.onrender.com",
+    "basePath": "/",
+    "schemes": ["https"],
+    "paths": {
+        "/login": {
+            "get": {
+                "tags": ["Authentication"],
+                "summary": "Authenticate User using Github. Cannot be done from here. Visit /login",
+                "description": "This endpoint is used to login.",
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
                 }
-              }
             }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/products/{id}": {
-      "get": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Get a product by its ID.",
-        "description": "Retrieves data for the specified product.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Update a product.",
-        "description": "Updates an existing product.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "price": {
-                  "example": "any"
-                },
-                "category": {
-                  "example": "any"
-                },
-                "size": {
-                  "example": "any"
-                },
-                "color": {
-                  "example": "any"
+        },
+        "/logout": {
+            "get": {
+                "tags": ["Authentication"],
+                "summary": "Logout Authenticated User. Cannot be done from here. Visit /logout",
+                "description": "This endpoint is used to logout.",
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
                 }
-              }
             }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
+        },
+        "/reviews/": {
+            "get": {
+                "tags": ["Reviews"],
+                "summary": "GET all",
+                "description": "",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Reviews"],
+                "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Add new review.",
+                        "schema": {
+                            "$ref": "#/definitions/CreateReview"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/reviews/{id}": {
+            "get": {
+                "tags": ["Reviews"],
+                "summary": "GET by id",
+                "description": "",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Reviews"],
+                "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update review.",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateReview"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Reviews"],
+                "description": "This endpoint requires authentication. For logging in visit '/auth' page.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/users/": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Retrieve a list of all users",
+                "description": "Must be Authenticated via Github 1st. This endpoint retrieves all users available in the database.",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create a new user",
+                "description": "Must be Authenticated via Github 1st. This endpoint creates a new user in the database.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Add new user.",
+                        "schema": {
+                            "$ref": "#/definitions/CreateUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get an user by ID",
+                "description": "Must be Authenticated via Github 1st. This endpoint retrieves a specific user by its ID.",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "value": "650c5812c06bc031e32200a1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Users"],
+                "summary": "Update an existing user",
+                "description": "Must be Authenticated via Github 1st. This endpoint updates an existing user in the database.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Add new user.",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Users"],
+                "summary": "Delete an user",
+                "description": "Must be Authenticated via Github 1st. This endpoint deletes a specific user by its ID from the database.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/orders/": {
+            "get": {
+                "tags": ["orders"],
+                "summary": "Retrieve a list of all orders",
+                "description": "Must be Authenticated via Github 1st. This endpoint retrieves all orders available in the database.",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["orders"],
+                "summary": "Create a new order",
+                "description": "Must be Authenticated via Github 1st. This endpoint creates a new order in the database.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Add new order.",
+                        "schema": {
+                            "$ref": "#/definitions/CreateOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": ["orders"],
+                "summary": "Get an order by ID",
+                "description": "Must be Authenticated via Github 1st. This endpoint retrieves a specific order by its ID.",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "value": "650c5812c06bc031e32200a1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["orders"],
+                "summary": "Update an existing order",
+                "description": "Must be Authenticated via Github 1st. This endpoint updates an existing order in the database.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Add new order.",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["orders"],
+                "summary": "Delete an order",
+                "description": "Must be Authenticated via Github 1st. This endpoint deletes a specific order by its ID from the database.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/products/": {
+            "get": {
+                "tags": ["Products"],
+                "summary": "Get a list of all products.",
+                "description": "Retrieves all products from the database.",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Products"],
+                "summary": "Create a new product.",
+                "description": "Adds a new product to the database.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "example": "any"
+                                },
+                                "description": {
+                                    "example": "any"
+                                },
+                                "price": {
+                                    "example": "any"
+                                },
+                                "category": {
+                                    "example": "any"
+                                },
+                                "size": {
+                                    "example": "any"
+                                },
+                                "color": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": ["Products"],
+                "summary": "Get a product by its ID.",
+                "description": "Retrieves data for the specified product.",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Products"],
+                "summary": "Update a product.",
+                "description": "Updates an existing product.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "example": "any"
+                                },
+                                "description": {
+                                    "example": "any"
+                                },
+                                "price": {
+                                    "example": "any"
+                                },
+                                "category": {
+                                    "example": "any"
+                                },
+                                "size": {
+                                    "example": "any"
+                                },
+                                "color": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Products"],
+                "summary": "Delete a product.",
+                "description": "Deletes the specified product from the database.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
         }
-      },
-      "delete": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Delete a product.",
-        "description": "Deletes the specified product from the database.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
+    },
+    "definitions": {
+        "CreateUser": {
+            "type": "object",
+            "properties": {
+                "fName": {
+                    "type": "string",
+                    "example": "MyFirstName"
+                },
+                "lName": {
+                    "type": "string",
+                    "example": "MyLastName"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "me@example.com"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "123-456-0911"
+                },
+                "address": {
+                    "type": "string",
+                    "example": "123 My Place"
+                },
+                "role": {
+                    "type": "string",
+                    "example": "customer"
+                }
+            }
+        },
+        "UpdateUser": {
+            "type": "object",
+            "properties": {
+                "fName": {
+                    "type": "string",
+                    "example": "MyFirstName"
+                },
+                "lName": {
+                    "type": "string",
+                    "example": "MyLastName"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "me@example.com"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "123-456-0911"
+                },
+                "address": {
+                    "type": "string",
+                    "example": "123 My Place"
+                },
+                "role": {
+                    "type": "string",
+                    "example": "admin"
+                }
+            }
+        },
+        "CreateOrder": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a2"
+                },
+                "productIds": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a4"
+                },
+                "total": {
+                    "type": "number",
+                    "example": 49.99
+                },
+                "orderDate": {
+                    "type": "string",
+                    "example": "2024-06-02"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "Processing"
+                },
+                "shippingAddress": {
+                    "type": "string",
+                    "example": "452 Oak St, Othercitytown, USA"
+                }
+            }
+        },
+        "UpdateOrder": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a3"
+                },
+                "productIds": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a4"
+                },
+                "total": {
+                    "type": "number",
+                    "example": 49.99
+                },
+                "orderDate": {
+                    "type": "string",
+                    "example": "2024-06-02"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "Processing"
+                },
+                "shippingAddress": {
+                    "type": "string",
+                    "example": "452 Oak St, Othercitytown, USA"
+                }
+            }
+        },
+        "CreateReview": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a2"
+                },
+                "productId": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a4"
+                },
+                "rating": {
+                    "type": "number",
+                    "example": 4
+                },
+                "comment": {
+                    "type": "string",
+                    "example": "Jeans fit well but a bit too long."
+                },
+                "reviewDate": {
+                    "type": "string",
+                    "example": "2024-06-06"
+                }
+            }
+        },
+        "UpdateReview": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a2"
+                },
+                "productId": {
+                    "type": "string",
+                    "example": "650c5812c06bc031e32200a4"
+                },
+                "rating": {
+                    "type": "number",
+                    "example": 10
+                },
+                "comment": {
+                    "type": "string",
+                    "example": "Jeans fit well but a bit too long."
+                },
+                "reviewDate": {
+                    "type": "string",
+                    "example": "2024-06-06"
+                }
+            }
         }
-      }
     }
-  },
-  "definitions": {
-    "CreateUser": {
-      "type": "object",
-      "properties": {
-        "fName": {
-          "type": "string",
-          "example": "MyFirstName"
-        },
-        "lName": {
-          "type": "string",
-          "example": "MyLastName"
-        },
-        "email": {
-          "type": "string",
-          "example": "me@example.com"
-        },
-        "phone": {
-          "type": "string",
-          "example": "123-456-0911"
-        },
-        "address": {
-          "type": "string",
-          "example": "123 My Place"
-        },
-        "role": {
-          "type": "string",
-          "example": "customer"
-        }
-      }
-    },
-    "UpdateUser": {
-      "type": "object",
-      "properties": {
-        "fName": {
-          "type": "string",
-          "example": "MyFirstName"
-        },
-        "lName": {
-          "type": "string",
-          "example": "MyLastName"
-        },
-        "email": {
-          "type": "string",
-          "example": "me@example.com"
-        },
-        "phone": {
-          "type": "string",
-          "example": "123-456-0911"
-        },
-        "address": {
-          "type": "string",
-          "example": "123 My Place"
-        },
-        "role": {
-          "type": "string",
-          "example": "admin"
-        }
-      }
-    },
-    "CreateOrder": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a2"
-        },
-        "productIds": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a4"
-        },
-        "total": {
-          "type": "number",
-          "example": 49.99
-        },
-        "orderDate": {
-          "type": "string",
-          "example": "2024-06-02"
-        },
-        "status": {
-          "type": "string",
-          "example": "Processing"
-        },
-        "shippingAddress": {
-          "type": "string",
-          "example": "452 Oak St, Othercitytown, USA"
-        }
-      }
-    },
-    "UpdateOrder": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a3"
-        },
-        "productIds": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a4"
-        },
-        "total": {
-          "type": "number",
-          "example": 49.99
-        },
-        "orderDate": {
-          "type": "string",
-          "example": "2024-06-02"
-        },
-        "status": {
-          "type": "string",
-          "example": "Processing"
-        },
-        "shippingAddress": {
-          "type": "string",
-          "example": "452 Oak St, Othercitytown, USA"
-        }
-      }
-    },
-    "CreateReview": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a2"
-        },
-        "productId": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a4"
-        },
-        "rating": {
-          "type": "number",
-          "example": 4
-        },
-        "comment": {
-          "type": "string",
-          "example": "Jeans fit well but a bit too long."
-        },
-        "reviewDate": {
-          "type": "string",
-          "example": "2024-06-06"
-        }
-      }
-    },
-    "UpdateReview": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a2"
-        },
-        "productId": {
-          "type": "string",
-          "example": "650c5812c06bc031e32200a4"
-        },
-        "rating": {
-          "type": "number",
-          "example": 10
-        },
-        "comment": {
-          "type": "string",
-          "example": "Jeans fit well but a bit too long."
-        },
-        "reviewDate": {
-          "type": "string",
-          "example": "2024-06-06"
-        }
-      }
-    }
-  }
 }

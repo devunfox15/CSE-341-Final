@@ -7,26 +7,41 @@
         "express": "^4.19.2",
         "express-session": "^1.18.0",
         "express-validator": "^7.1.0",
+        "http-errors": "^2.0.0",
         "mongodb": "^6.8.0",
         "passport": "^0.7.0",
         "passport-github2": "^0.1.12",
         "swagger-ui-express": "^5.0.1"
     },
     "devDependencies": {
+        "jest": "^29.7.0",
+        "mongodb-memory-server": "^9.4.1",
         "nodemon": "^3.1.4",
-        "prettier": "^3.3.2",
+        "prettier": "^3.3.3",
+        "supertest": "^7.0.0",
         "swagger-autogen": "^2.23.7"
     },
     "name": "backend",
     "version": "1.0.0",
     "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "start": "npm run swagger & nodemon server.js",
         "swagger": "node ./swagger.js",
-        "swagger:prod": "ENV=production npm run swagger",
+        "swagger:prod": "NODE_ENV=production npm run swagger",
         "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-        "build": "npm run swagger:prod & npm run format"
+        "build": "npm run swagger:prod & npm run format",
+        "test": "jest --detectOpenHandles --verbose"
+    },
+    "jest": {
+        "automock": false,
+        "moduleNameMapper": {
+            "^../db/database$": "<rootDir>/__mocks__/database.js"
+        },
+        "collectCoverage": true,
+        "coverageReporters": [
+            "html"
+        ],
+        "testEnvironment": "node"
     },
     "keywords": [],
     "author": "",

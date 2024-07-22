@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/database');
@@ -9,9 +8,16 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
+const createError = require('http-errors');
 
 const port = process.env.PORT || 8080;
 const app = express();
+
+//add swagger docs here for production
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Configure MongoDBStore
 const store = new MongoDBStore({
@@ -23,13 +29,33 @@ store.on('error', function (error) {
     console.error('MongoDBStore connection error:', error);
 });
 
-// Use cors middleware
+//TESTING CORS
+// CORS configuration
+const allowedOrigins = ['https://cse-341-final-jg71.onrender.com'];
+
 app.use(
     cors({
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-        origin: '*'
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true // Allow credentials
     })
 );
+
+// Handle preflight requests
+app.options('*', cors());
+
+//app.use(cors({
+//    origin: '*',
+//    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+//    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+//}));
 
 // Use body-parser middleware
 app.use(bodyParser.json());
@@ -108,7 +134,7 @@ app.get(
         console.log(
             'req.session.user.id:',
             req.session.user ? req.session.user.id : 'undefined'
-        );
+        ); // error seems to be here
         req.session.save((err) => {
             if (err) {
                 console.error('Session save error:', err);
@@ -129,12 +155,6 @@ mongodb.initDb((err) => {
     }
 });
 
-//// Error handling middleware
-//app.use((err, req, res, next) => {
-//    console.error(err.stack);
-//    res.status(500).send('Internal Server Error');
-//});
-
 // Error handler for 404
 app.use((req, res, next) => {
     next(createError(404, 'Not Found'));
@@ -151,3 +171,5 @@ app.use((err, req, res, next) => {
         }
     });
 });
+
+module.exports = app

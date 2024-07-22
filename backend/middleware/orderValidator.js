@@ -2,27 +2,30 @@ const { body, validationResult } = require('express-validator');
 
 const orderValidationRules = () => {
     return [
-        // fName must be a string and is required
-        body('userId').isString().notEmpty().withMessage('userId is required'),
-        // lName must be a string and is required
+        // userId must be a string and is required
+        body('userId')
+            .isString()
+            .withMessage('needs to be a string')
+            .notEmpty()
+            .withMessage('userId is required'),
+        // productIds must be an array and is required
         body('productIds')
-            .isArray()
             .notEmpty()
             .withMessage('An Array of productId is required'),
-        // email must be an email and is required
-        body('totalPrice')
-            .isFloat()
-            .notEmpty()
-            .withMessage('total is required'),
-        // phone must be a string and is required
+        // totalPrice must be a float and is required
+        body('total').isNumeric().withMessage('total is required'),
+        // orderDate must be a string and is required
         body('orderDate')
             .isString()
+            .withMessage('needs to be a string')
             .notEmpty()
             .withMessage('orderDate is required'),
         // order status must be a string and is required
         body('status')
             .isString()
+            .withMessage('needs to be a string')
             .notEmpty()
+            .withMessage('cant be empty')
             .withMessage('shippingAddress is required')
             .matches(/^(Shipped|Processing|Cancelled)$/)
             .withMessage(
@@ -31,6 +34,7 @@ const orderValidationRules = () => {
         // address must be a string and is required
         body('shippingAddress')
             .isString()
+            .withMessage('needs to be a string')
             .notEmpty()
             .withMessage('address is required')
     ];

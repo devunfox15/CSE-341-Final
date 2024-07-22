@@ -1,8 +1,8 @@
 require('dotenv').config();
 const swaggerAutogen = require('swagger-autogen')();
 
-const { ENV, RENDER_URL, PORT } = process.env;
-const forProd = ENV === 'production';
+const { NODE_ENV, RENDER_URL, PORT } = process.env;
+const forProd = NODE_ENV === 'production';
 const host = forProd ? RENDER_URL : `localhost:${PORT || 8080}`;
 
 const htmlInDescription = `<p>Final assignment for CSE341<p>
