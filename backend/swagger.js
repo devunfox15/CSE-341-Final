@@ -7,8 +7,8 @@ const host = forProd ? RENDER_URL : `localhost:${PORT || 8080}`;
 
 const htmlInDescription = `<p>Final assignment for CSE341<p>
     <p>Authentication links: </p>
-    <a href='/auth'>Login</a><br />
-    <a href='/auth/logout'>Logout</a>`;
+    <a href='/login'>Login</a><br />
+    <a href='/logout'>Logout</a>`;
 
 const doc = {
     info: {
